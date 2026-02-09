@@ -1,6 +1,8 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import HomeScreen from '../screens/home/HomeScreen';
 import ProductStack from './ProductStack';
 import CartStack from './CartStack';
@@ -13,6 +15,7 @@ const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
   const { totalItems } = useCart();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tab.Navigator
@@ -44,8 +47,8 @@ const MainTabs = () => {
           backgroundColor: Colors.white,
           borderTopColor: Colors.gray200,
           borderTopWidth: 1,
-          paddingBottom: 4,
-          height: 56,
+          paddingBottom: Math.max(insets.bottom, 4),
+          height: 56 + Math.max(insets.bottom, 0),
         },
         tabBarLabelStyle: {
           fontSize: 11,

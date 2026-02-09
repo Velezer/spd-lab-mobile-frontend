@@ -6,6 +6,7 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../constants/colors';
 import { useAuth } from '../../contexts/AuthContext';
@@ -13,6 +14,7 @@ import Button from '../../components/Button';
 
 const ProfileScreen = ({ navigation }) => {
   const { user, logout } = useAuth();
+  const insets = useSafeAreaInsets();
 
   const handleLogout = () => {
     Alert.alert('Logout', 'Apakah Anda yakin ingin keluar?', [
@@ -77,7 +79,7 @@ const ProfileScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.logoutSection}>
+      <View style={[styles.logoutSection, { paddingBottom: 20 + insets.bottom }]}>
         <Button title="Logout" onPress={handleLogout} variant="secondary" />
       </View>
     </View>
